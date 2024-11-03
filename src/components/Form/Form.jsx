@@ -3,6 +3,7 @@ import { FiSearch } from 'react-icons/fi';
 import style from './Form.module.css';
 import { useDispatch } from 'react-redux';
 import { addTodos } from 'reduxTodo/toDosSlice';
+import { nanoid } from '@reduxjs/toolkit';
 
 export const Form = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,12 @@ export const Form = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const input = e.target.elements.search.value;
-    dispatch(addTodos(input));
+    dispatch(
+      addTodos({
+        id: nanoid(),
+        text: input,
+      }),
+    );
     e.target.reset();
   };
 
